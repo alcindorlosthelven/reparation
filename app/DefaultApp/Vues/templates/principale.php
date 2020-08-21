@@ -52,7 +52,7 @@ $role=\systeme\Model\Utilisateur::role();
         <li class="nav-item" style="<?php if($role==="agent")echo "display:none" ?>">
             <a class="nav-link" href="succursal">
                 <i class="fas fa-fw fa-house-user"></i>
-                <span>Succursal</span></a>
+                <span>Succursale</span></a>
         </li>
 
         <li class="nav-item">

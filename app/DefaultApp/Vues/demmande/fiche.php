@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="form-group col-6">
-                            <label>Succursal</label>
+                            <label>Succursale</label>
                             <input readonly
                                    value="<?php if (isset($succursal)) echo stripslashes($succursal->getNom()) ?>"
                                    type="text" class="form-control">

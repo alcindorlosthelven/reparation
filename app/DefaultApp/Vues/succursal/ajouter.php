@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <?= \systeme\Application\Application::block("menu_succursal") ?>
         <div class="card">
-            <div class="card-header"><h4>Ajouter Succursal</h4></div>
+            <div class="card-header"><h4>Ajouter Succursale</h4></div>
 
             <div class="card-body">
                 <?php

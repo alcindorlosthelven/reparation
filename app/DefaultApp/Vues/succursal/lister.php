@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <?= \systeme\Application\Application::block("menu_succursal") ?>
         <div class="card">
-            <div class="card-header"><h4>Liste des Succursals</h4></div>
+            <div class="card-header"><h4>Liste des Succursales</h4></div>
 
             <div class="card-body">
                 <table class="table table-bordered  datatable">

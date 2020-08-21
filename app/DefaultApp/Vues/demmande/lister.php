@@ -10,7 +10,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Catégorie</th>
-                        <th>Succursal</th>
+                        <th>Succursale</th>
                         <th>Date</th>
                         <th></th>
                         <th></th>

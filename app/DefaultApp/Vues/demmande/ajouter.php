@@ -59,7 +59,7 @@ use app\DefaultApp\Models\Utilisateur;
                         </div>
 
                         <div class="form-group col-6">
-                            <label>Succursal</label>
+                            <label>Succursale</label>
                             <select name="id_succursal" class="form-control" required>
                                 <?php
                                 if (isset($succursal)) {
