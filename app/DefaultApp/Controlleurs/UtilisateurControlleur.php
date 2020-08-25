@@ -25,7 +25,6 @@ class UtilisateurControlleur extends BaseControlleur
                 $utlisateur->setPseudo($_POST['pseudo']);
                 $utlisateur->setRole($_POST['role']);
                 $utlisateur->setActive("oui");
-                $utlisateur->setIdSuccursal($_POST['id_succursal']);
                 $motdepasse = $_POST['motdepasse'];
                 $confirmer = $_POST['confirmermotdepasse'];
 
@@ -84,8 +83,20 @@ class UtilisateurControlleur extends BaseControlleur
 
     public function lister()
     {
-        $listeUtilisateur = $this->getModel("utilisateur")->Lister();
-        $variable = array("titre" => "Utilisateur / Lister", "listeUtilisateur" => $listeUtilisateur);
+        if(isset($_GET['tous'])){
+            $listeUtilisateur = $this->getModel("utilisateur")->findAll();
+        }elseif(isset($_GET['admin'])){
+            $listeUtilisateur=Utilisateur::listeAdmin();
+        }elseif(isset($_GET['agent'])){
+            $listeUtilisateur=Utilisateur::listeAgent();
+        }elseif(isset($_GET['reparateur'])){
+            $listeUtilisateur=Utilisateur::listeReparateur();
+        }else{
+            $listeUtilisateur = $this->getModel("utilisateur")->findAll();
+        }
+
+        $variable['titre']="Liste des utilisateurs";
+        $variable['listeUtilisateur']=$listeUtilisateur;
         $this->render("utilisateur/lister", $variable);
     }
 

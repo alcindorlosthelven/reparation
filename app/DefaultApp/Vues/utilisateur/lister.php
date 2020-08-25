@@ -3,9 +3,15 @@
     <div class="col-md-12">
         <?= \systeme\Application\Application::block("menu_utilisateur") ?>
         <div class="card">
-            <div class="card-header"><h4>Liste Utilisateur</h4></div>
+            <div class="card-header"><h4>Liste des Utilisateurs</h4></div>
 
             <div class="card-body">
+                <a href="utilisateur?admin" class="btn btn-warning">Admin</a>
+                <a href="utilisateur?agent" class="btn btn-warning">Agent</a>
+                <a href="utilisateur?reparateur" class="btn btn-warning">Réparateur</a>
+                <a href="utilisateur?tous" class="btn btn-warning">Tous</a>
+                <hr>
+
                 <table class="table table-bordered  datatable">
                     <thead>
                     <tr>
@@ -13,7 +19,6 @@
                         <th>Pseudo</th>
                         <th>Role</th>
                         <th>Active</th>
-                        <th></th>
                         <th></th>
                     </tr>
                     </thead>
@@ -56,13 +61,6 @@
                                     }
 
                                     ?>
-
-
-                                    <td>
-                                        <a class="delete" href="supprimer-utilisateur-<?= $utilisateur->getId() ?>"><i style="color:red"
-                                                                                                                       class="fa fa-trash"></i></a>
-                                    </td>
-
 
                                 </tr>
                                 <?php

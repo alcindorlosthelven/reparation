@@ -64,26 +64,16 @@
                                         Agent
                                     </option>
 
+                                    <option value="reparateur">
+                                        Réparateur
+                                    </option>
+
                                 </select>
                                 <hr>
                             </div>
                         </div>
 
                         <div class="col-md-6">
-
-                            <div class="form-group">
-                                <label for="company">Succursal</label>
-                                <select name="id_succursal" class="form-control" style="height: 40px;">
-                                    <?php
-                                    foreach ($listeSuc as $suc){
-                                        ?>
-                                        <option value="<?= $suc->getId() ?>"><?= $suc->getNom() ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-
 
                             <div class="form-group">
                                 <label for="company">Motdepasse</label>

@@ -8,6 +8,7 @@
 
 namespace app\DefaultApp\Controlleurs;
 
+use app\DefaultApp\DefaultApp;
 use app\DefaultApp\Models\Categorie;
 use app\DefaultApp\Models\DemmandeReparation;
 use app\DefaultApp\Models\Succursal;
@@ -18,6 +19,10 @@ class DemmandeControlleur extends BaseControlleur
 
     public function ajouter()
     {
+        $role=Utilisateur::role();
+        if($role==="reparateur"){
+            DefaultApp::redirection("lister_demmande");
+        }
         try{
             $variable = array();
             $variable['titre'] = "Ajouter Demmande";
@@ -28,10 +33,6 @@ class DemmandeControlleur extends BaseControlleur
             $variable['listeCategorie']=$listeCategorie;
             $variable['listeSuccursal']=$listeSuccursal;
 
-
-            if ($_SERVER['REQUEST_METHOD'] === "POST") {
-
-            }
             $this->render("demmande/ajouter", $variable);
         }catch (\Exception $ex){
             echo $ex->getMessage();
@@ -48,7 +49,13 @@ class DemmandeControlleur extends BaseControlleur
             $fiche=$fiche->findById($id);
             if($fiche!==null){
                 $variable['fiche']=$fiche;
+                if(isset($_GET['finaliser'])){
+                    $fiche->setStatut("terminer");
+                    $fiche->update();
+                    DefaultApp::redirection("lister_demmande");
+                }
             }
+
             $this->render("demmande/fiche", $variable);
         }catch (\Exception $ex){
             echo $ex->getMessage();
@@ -70,15 +77,18 @@ class DemmandeControlleur extends BaseControlleur
     public function lister()
     {
         $role=Utilisateur::role();
+        $id_user=Utilisateur::session_valeur();
         if($role==="agent"){
-            $id_user=Utilisateur::session_valeur();
-            $u=Utilisateur::Rechercher($id_user);
-            $listeDemmande = $this->getModel("demmandeReparation")->listerParSuccursal($u->getIdSuccursal());
-        }else{
+            $listeDemmande = $this->getModel("demmandeReparation")->listerParAgent($id_user);
+        }elseif($role==="reparateur"){
+            $listeDemmande = $this->getModel("demmandeReparation")->listerParReparateur($id_user);
+        } else{
             $listeDemmande = $this->getModel("demmandeReparation")->findAll();
         }
 
-        $variable = array("titre" => "Liste des demmande", "listeDemmande" => $listeDemmande);
+        $listeReparateur=Utilisateur::listeReparateur();
+
+        $variable = array("titre" => "Liste des demmande", "listeDemmande" => $listeDemmande,"listeReparateur"=>$listeReparateur);
         $this->render("demmande/lister", $variable);
     }
 

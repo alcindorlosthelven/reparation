@@ -32,9 +32,11 @@ if($role!=="agent") {
 
 //succursal
     App::get("/succursal", "succursal.lister", "succursal");
+    App::post("/succursal", "succursal.lister", "succursal");
     App::get("/ajouter-succursal", "succursal.ajouter", "ajouter_succursal");
     App::post("/ajouter-succursal", "succursal.ajouter", "ajouter_succursal");
     App::get("/lister-succursal", "succursal.lister", "lister_succursal");
+    App::post("/lister-succursal", "succursal.lister", "lister_succursal");
     App::get("/supprimer-succursal-:id", "succursal.supprimer", "supprimer_succursal")->avec("id", "['0-9']+");
     App::get("/modifier-succursal-:id", "succursal.modifier", "modifier_succursal")->avec("id", "['0-9']+");
     App::post("/modifier-succursal-:id", "succursal.modifier")->avec("id", "['0-9']+");
@@ -51,8 +53,10 @@ App::get("/modifier-demmande-:id", "demmande.modifier", "modifier_demmande")->av
 App::post("/modifier-demmande-:id", "demmande.modifier")->avec("id", "['0-9']+");
 App::get("/fiche-demmande-:id", "demmande.fiche")->avec("id", "['0-9']+");
 
-App::get("/ajouter-categorie", "demmande.ajouterCategorie", "ajouter_categorie");
-App::post("/ajouter-categorie", "demmande.ajouterCategorie","ajouter_categorie");
-App::get("/lister-categorie", "demmande.listerCategorie", "lister_categorie");
-App::get("/modifier-categorie-:id", "demmande.modifierCategorie")->avec("id", "['0-9']+");
+//if($role!=="agent") {
+    App::get("/ajouter-categorie", "demmande.ajouterCategorie", "ajouter_categorie");
+    App::post("/ajouter-categorie", "demmande.ajouterCategorie", "ajouter_categorie");
+    App::get("/lister-categorie", "demmande.listerCategorie", "lister_categorie");
+    App::get("/modifier-categorie-:id", "demmande.modifierCategorie")->avec("id", "['0-9']+");
+//}
 //fin demmande

@@ -6,9 +6,7 @@ use app\DefaultApp\Models\Utilisateur;
         <?= \systeme\Application\Application::block("menu_demmande") ?>
         <?php
         $id_user = Utilisateur::session_valeur();
-        $user = Utilisateur::Rechercher($id_user);
-        $succursal = new \app\DefaultApp\Models\Succursal();
-        $succursal = $succursal->findById($user->getIdSuccursal());
+        $listeSuccursal=\app\DefaultApp\Models\Succursal::listerParAgent($id_user);
         ?>
         <div class="card">
             <div class="card-header"><h4>Ajouter Demmande</h4></div>
@@ -42,6 +40,7 @@ use app\DefaultApp\Models\Utilisateur;
 
                 <form method="post" action="" class="ajouter_demmande" enctype="multipart/form-data">
                     <input type="hidden" name="ajouter_demmande">
+                    <input type="hidden" name="id_agent" value="<?= $id_user ?>">
                     <div class="row">
                         <div class="form-group col-6">
                             <label>Catégorie</label>
@@ -62,8 +61,9 @@ use app\DefaultApp\Models\Utilisateur;
                             <label>Succursale</label>
                             <select name="id_succursal" class="form-control" required>
                                 <?php
-                                if (isset($succursal)) {
-                                    if ($succursal !== null) {
+                                if (isset($listeSuccursal)) {
+
+                                    foreach ($listeSuccursal as $succursal) {
                                         ?>
                                         <option value="<?= $succursal->getId() ?>"><?= ucfirst(stripslashes($succursal->getNom())) ?></option>
                                         <?php
@@ -75,8 +75,8 @@ use app\DefaultApp\Models\Utilisateur;
                     </div>
 
                     <div class="form-group">
-                        <label>Description</label>
-                        <textarea class="form-control" name="description"></textarea>
+                        <label>Description (320 caractères)</label>
+                        <textarea class="form-control" name="description" maxlength="320"></textarea>
                     </div>
 
                     <div class="form-group">

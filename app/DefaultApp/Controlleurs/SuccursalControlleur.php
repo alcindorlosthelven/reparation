@@ -8,8 +8,10 @@
 
 namespace app\DefaultApp\Controlleurs;
 
+use app\DefaultApp\Models\GeoLocalisation;
 use app\DefaultApp\Models\Succursal;
 use app\DefaultApp\Models\Utilisateur;
+use app\DefaultApp\Models\Departement;
 
 class SuccursalControlleur extends BaseControlleur
 {
@@ -31,6 +33,12 @@ class SuccursalControlleur extends BaseControlleur
                     $variable['suc']=$suc;
                 }
             }
+            $departement=new Departement();
+            $listeDepartement=$departement->findAll();
+            $listeAgent=Utilisateur::listeAgent();
+            $variable['listeDepartement']=$listeDepartement;
+            $variable['listeAgent']=$listeAgent;
+
             $this->render("succursal/ajouter", $variable);
         }catch (\Exception $ex){
             echo $ex->getMessage();
@@ -62,8 +70,18 @@ class SuccursalControlleur extends BaseControlleur
 
     public function lister()
     {
-        $listeUtilisateur = $this->getModel("succursal")->findAll();
-        $variable = array("titre" => "Liste des succursal", "listeSuccursal" => $listeUtilisateur);
+        $variable=array();
+        $listeAgent=Utilisateur::listeAgent();
+        $listeSuccursal = $this->getModel("succursal")->findAll();
+        if(isset($_POST['id_agent'])){
+            $agent=new Utilisateur();
+            $agent=$agent->findById($_POST['id_agent']);
+            $variable['agent']=$agent;
+            $listeSuccursal =$this->getModel("succursal")->listerParAgent($_POST['id_agent']);
+        }
+        $variable['titre']="Liste des succursale";
+        $variable['listeSuccursal']=$listeSuccursal;
+        $variable['listeAgent']=$listeAgent;
         $this->render("succursal/lister", $variable);
     }
 

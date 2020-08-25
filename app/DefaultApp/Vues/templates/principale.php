@@ -1,11 +1,13 @@
 <?php
 
+use app\DefaultApp\Models\GeoLocalisation;
 use systeme\Application\Application as App;
 
 if (!\systeme\Model\Utilisateur::session()) {
     app::redirection("connexion");
 }
 $role=\systeme\Model\Utilisateur::role();
+$localisation=new GeoLocalisation();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,14 +44,7 @@ $role=\systeme\Model\Utilisateur::role();
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
-        <!-- Nav Item - Dashboard -->
-        <!--<li class="nav-item">
-            <a class="nav-link" href="dashboard">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a>
-        </li>-->
-
-        <li class="nav-item" style="<?php if($role==="agent")echo "display:none" ?>">
+        <li class="nav-item" style="<?php if($role==="agent" || $role ==="reparateur")echo "display:none" ?>">
             <a class="nav-link" href="succursal">
                 <i class="fas fa-fw fa-house-user"></i>
                 <span>Succursale</span></a>
@@ -61,7 +56,7 @@ $role=\systeme\Model\Utilisateur::role();
                 <span>Demmandes</span></a>
         </li>
 
-        <li class="nav-item" style="<?php if($role==="agent")echo "display:none" ?>">
+        <li class="nav-item" style="<?php if($role==="agent" || $role ==="reparateur")echo "display:none" ?>">
             <a class="nav-link" href="utilisateur">
                 <i class="fas fa-fw fa-house-user"></i>
                 <span>Utilisateurs</span></a>
@@ -214,7 +209,9 @@ $role=\systeme\Model\Utilisateur::role();
 <script>
     $("document").ready(function () {
         $("form").addClass("was-validated");
-
+        <?php
+        //new \app\DefaultApp\Models\GeoLocalisation();
+        ?>
         $(".ajouter_demmande").on("submit", function (e) {
             e.preventDefault();
             $('#load').show();
@@ -268,6 +265,104 @@ $role=\systeme\Model\Utilisateur::role();
             });
 
         });
+
+        $(".form-ajouter-succursal").on("submit", function (e) {
+            e.preventDefault();
+            $('#load').show();
+            $.ajax({
+                type: 'POST',
+                url: "app/DefaultApp/traitements/succursal.php",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function(){
+                    $(".message").html("<div class='alert alert-info'>Patienter un instant.........</div>")
+                },
+                success: function (reponse) {
+                    if(reponse.trim()==="ok"){
+                        $(".message").html("<div class='alert alert-success'>Enregistrer avec success</div>");
+                        alert('fait avec success');
+                        document.location.href='lister-succursal';
+                    }else{
+                        $(".message").html("<div class='alert alert-success'>"+reponse+"</div>");
+                    }
+                    $('#load').hide();
+                }
+            });
+
+        });
+
+        $(".form-attribuer").on("submit", function (e) {
+            e.preventDefault();
+            $('#load').show();
+            $.ajax({
+                type: 'POST',
+                url: "app/DefaultApp/traitements/demmande.php",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function(){
+                    $(".message").html("<div class='alert alert-info'>Patienter un instant.........</div>")
+                },
+                success: function (reponse) {
+                    if(reponse.trim()==="ok"){
+                        $(".message").html("<div class='alert alert-success'>Fait avec success</div>");
+                        alert('fait avec success');
+                        location.reload(true);
+                    }else{
+                        $(".message").html("<div class='alert alert-success'>"+reponse+"</div>");
+                    }
+                    $('#load').hide();
+                }
+            });
+
+        });
+
+        $(".form_note").on("submit", function (e) {
+            e.preventDefault();
+            $('#load').show();
+            $.ajax({
+                type: 'POST',
+                url: "app/DefaultApp/traitements/demmande.php",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function(){
+                    $(".message").html("<div class='alert alert-info'>Patienter un instant.........</div>")
+                },
+                success: function (reponse) {
+                    if(reponse.trim()==="ok"){
+                        $(".message").html("<div class='alert alert-success'>Fait avec success</div>");
+                        alert('fait avec success');
+                        location.reload(true);
+                    }else{
+                        $(".message").html("<div class='alert alert-success'>"+reponse+"</div>");
+                    }
+                    $('#load').hide();
+                }
+            });
+
+        });
+
+
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgInp").change(function () {
+            readURL(this);
+        });
+
+
     });
 </script>
 </html>

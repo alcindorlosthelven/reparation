@@ -10,6 +10,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Catégorie</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>

@@ -15,6 +15,109 @@ class DemmandeReparation extends Model
 
     protected $table = "demmande_reparation";
     private $id,$id_succursal,$id_categorie,$description,$fichier,$date;
+    private $id_reparateur,$statut,$id_agent;
+    private $note1,$note2,$preuve;
+
+    /**
+     * @return mixed
+     */
+    public function getPreuve()
+    {
+        return $this->preuve;
+    }
+
+    /**
+     * @param mixed $preuve
+     */
+    public function setPreuve($preuve)
+    {
+        $this->preuve = $preuve;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getNote1()
+    {
+        return $this->note1;
+    }
+
+    /**
+     * @param mixed $note1
+     */
+    public function setNote1($note1)
+    {
+        $this->note1 = $note1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNote2()
+    {
+        return $this->note2;
+    }
+
+    /**
+     * @param mixed $note2
+     */
+    public function setNote2($note2)
+    {
+        $this->note2 = $note2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdReparateur()
+    {
+        return $this->id_reparateur;
+    }
+
+    /**
+     * @param mixed $id_reparateur
+     */
+    public function setIdReparateur($id_reparateur)
+    {
+        $this->id_reparateur = $id_reparateur;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getStatut()
+    {
+        return $this->statut;
+    }
+
+    /**
+     * @param mixed $statut
+     */
+    public function setStatut($statut)
+    {
+        $this->statut = $statut;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdAgent()
+    {
+        return $this->id_agent;
+    }
+
+    /**
+     * @param mixed $id_agent
+     */
+    public function setIdAgent($id_agent)
+    {
+        $this->id_agent = $id_agent;
+    }
+
+
 
     /**
      * @return mixed
@@ -135,6 +238,22 @@ class DemmandeReparation extends Model
         $req="select *from demmande_reparation where id_succursal=:id_succursal";
         $stmt=$con->prepare($req);
         $stmt->execute(array(":id_succursal"=>$id_succursal));
+        return $stmt->fetchAll(\PDO::FETCH_CLASS,__CLASS__);
+    }
+
+    public function listerParAgent($id_agent){
+        $con=self::connection();
+        $req="select *from demmande_reparation where id_agent=:id_agent";
+        $stmt=$con->prepare($req);
+        $stmt->execute(array(":id_agent"=>$id_agent));
+        return $stmt->fetchAll(\PDO::FETCH_CLASS,__CLASS__);
+    }
+
+    public function listerParReparateur($id_reparateur){
+        $con=self::connection();
+        $req="select *from demmande_reparation where id_reparateur=:id_reparateur";
+        $stmt=$con->prepare($req);
+        $stmt->execute(array(":id_reparateur"=>$id_reparateur));
         return $stmt->fetchAll(\PDO::FETCH_CLASS,__CLASS__);
     }
 

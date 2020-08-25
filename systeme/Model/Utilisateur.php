@@ -12,18 +12,18 @@ use app\sge\Models\TempConnexion;
 
 class Utilisateur extends Model
 {
-    private $id;
-    private $pseudo;
-    private $email;
-    private $nom;
-    private $prenom;
-    private $role;
-    private $active;
-    private $motdepasse;
-    private $statut;
-    private $telephone;
-    private $photo;
-    private $id_succursal;
+    protected $id;
+    protected $pseudo;
+    protected $email;
+    protected  $nom;
+    protected $prenom;
+    protected $role;
+    protected $active;
+    protected $motdepasse;
+    protected $statut;
+    protected $telephone;
+    protected $photo;
+    protected $id_succursal;
 
     /**
      * @return mixed
