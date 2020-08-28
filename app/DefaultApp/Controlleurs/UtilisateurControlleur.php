@@ -25,6 +25,8 @@ class UtilisateurControlleur extends BaseControlleur
                 $utlisateur->setPseudo($_POST['pseudo']);
                 $utlisateur->setRole($_POST['role']);
                 $utlisateur->setActive("oui");
+                $utlisateur->setTelephone(trim(addslashes($_POST['telephone'])));
+                $utlisateur->setEmail(trim(addslashes($_POST['email'])));
                 $motdepasse = $_POST['motdepasse'];
                 $confirmer = $_POST['confirmermotdepasse'];
 
@@ -48,29 +50,31 @@ class UtilisateurControlleur extends BaseControlleur
         }
     }
 
-    public function modifier()
+    public function modifier($id)
     {
 
         $variable = array();
         $variable['titre'] = "Utilisateur / modifier";
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $utlisateur = $this->getModel("utilisateur");
+        $utlisateur=Utilisateur::Rechercher($id);
+        $variable['utilisateur']=$utlisateur;
+        if ($_SERVER['REQUEST_METHOD'] === "POST") {
+
             $utlisateur->setNom($_POST['nom']);
             $utlisateur->setPrenom($_POST['prenom']);
             $utlisateur->setPseudo($_POST['pseudo']);
-            $utlisateur->setRole($_POST['role']);
-            $utlisateur->setActive("oui");
+            $utlisateur->setTelephone(trim(addslashes($_POST['telephone'])));
+            $utlisateur->setEmail(trim(addslashes($_POST['email'])));
             $motdepasse = $_POST['motdepasse'];
             $confirmer = $_POST['confirmermotdepasse'];
-
             if ($motdepasse != $confirmer) {
                 $variable['erreur'] = "Verifier les mot de passe";
             } else {
-                $utlisateur->setMotdepasse($motdepasse);
-
-                $message = $utlisateur->Enregistrer();
-                if ($message == 'Enregistrer avec sucess') {
-                    $variable['success'] = $message;
+                if($motdepasse!=="1x1") {
+                    $utlisateur->setMotdepasse($motdepasse);
+                }
+                $message = $utlisateur->update();
+                if ($message === "ok") {
+                    $variable['success'] = "Modifier avec success";
                 } else {
                     $variable['erreur'] = $message;
                 }

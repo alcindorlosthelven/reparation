@@ -6,15 +6,15 @@ App::get("/logout", function (){
     App::redirection("connexion");
 }, "index");
 
-App::get("/", "default.index", "index");
-App::post("/", "default.index","index_post");
+App::get("/", "demmande.lister", "index");
+App::post("/", "demmande.lister","index_post");
 
 App::get("/", "login.login");
 App::post("/", "login.login");
 App::get("/login", "login.login", "connexion");
 App::post("/login", "login.login");
 
-App::post("/dashboard", "default.index");
+App::post("/dashboard", "demmande.lister");
 
 if($role!=="agent") {
 //utilisateur
@@ -48,6 +48,7 @@ App::get("/demmande", "demmande.lister","demmande");
 App::get("/ajouter-demmande", "demmande.ajouter", "ajouter_demmande");
 App::post("/ajouter-demmande", "demmande.ajouter","ajouter_demmande");
 App::get("/lister-demmande", "demmande.lister", "lister_demmande");
+App::post("/lister-demmande", "demmande.lister", "lister_demmande");
 App::get("/supprimer-demmande-:id", "demmande.supprimer", "supprimer_demmande")->avec("id", "['0-9']+");
 App::get("/modifier-demmande-:id", "demmande.modifier", "modifier_demmande")->avec("id", "['0-9']+");
 App::post("/modifier-demmande-:id", "demmande.modifier")->avec("id", "['0-9']+");

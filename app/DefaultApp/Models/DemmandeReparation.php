@@ -17,6 +17,41 @@ class DemmandeReparation extends Model
     private $id,$id_succursal,$id_categorie,$description,$fichier,$date;
     private $id_reparateur,$statut,$id_agent;
     private $note1,$note2,$preuve;
+    private $explication_additionel,$reponse_explication;
+
+    /**
+     * @return mixed
+     */
+    public function getExplicationAdditionel()
+    {
+        return $this->explication_additionel;
+    }
+
+    /**
+     * @param mixed $explication_additionel
+     */
+    public function setExplicationAdditionel($explication_additionel)
+    {
+        $this->explication_additionel = $explication_additionel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReponseExplication()
+    {
+        return $this->reponse_explication;
+    }
+
+    /**
+     * @param mixed $reponse_explication
+     */
+    public function setReponseExplication($reponse_explication)
+    {
+        $this->reponse_explication = $reponse_explication;
+    }
+
+
 
     /**
      * @return mixed
@@ -241,21 +276,43 @@ class DemmandeReparation extends Model
         return $stmt->fetchAll(\PDO::FETCH_CLASS,__CLASS__);
     }
 
-    public function listerParAgent($id_agent){
+    public function listerParAgent($id_agent,$de="",$a="",$statut=""){
         $con=self::connection();
-        $req="select *from demmande_reparation where id_agent=:id_agent";
+        if($de==""){
+            $req="select *from demmande_reparation where id_agent=:id_agent";
+        }else{
+            $req="select *from demmande_reparation where id_agent=:id_agent and date between '{$de}' and '{$a}' and statut='{$statut}'";
+        }
         $stmt=$con->prepare($req);
         $stmt->execute(array(":id_agent"=>$id_agent));
         return $stmt->fetchAll(\PDO::FETCH_CLASS,__CLASS__);
     }
 
-    public function listerParReparateur($id_reparateur){
+    public function listerParReparateur($id_reparateur ,$de="",$a="",$statut=""){
         $con=self::connection();
-        $req="select *from demmande_reparation where id_reparateur=:id_reparateur";
+        if($de==""){
+            $req="select *from demmande_reparation where id_reparateur=:id_reparateur";
+        }else{
+            $req="select *from demmande_reparation where id_reparateur=:id_reparateur and date between '{$de}' and '{$a}' and statut='{$statut}'";
+        }
         $stmt=$con->prepare($req);
         $stmt->execute(array(":id_reparateur"=>$id_reparateur));
         return $stmt->fetchAll(\PDO::FETCH_CLASS,__CLASS__);
     }
+
+    public function listerAll($de="",$a="",$statut=""){
+        $con=self::connection();
+        if($de==""){
+            $req="select *from demmande_reparation";
+        }else{
+            $req="select *from demmande_reparation where date between '{$de}' and '{$a}' and statut='{$statut}'";
+        }
+        $stmt=$con->prepare($req);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_CLASS,__CLASS__);
+    }
+
+
 
 
 }

@@ -3,8 +3,38 @@
         <?= \systeme\Application\Application::block("menu_demmande") ?>
         <div class="card">
             <div class="card-header"><h4>Liste des demmandes</h4></div>
-
             <div class="card-body">
+                <form method="post">
+                    <div class="row">
+                        <div class="form-group col-3">
+                            <label>De</label>
+                            <input value="<?php if (isset($_POST['de'])){echo $_POST['de'];}else{echo date("Y-m-d");} ?>" type="text" name="de"
+                                   class="datePicker form-control" required>
+                        </div>
+
+                        <div class="form-group col-3">
+                            <label>A</label>
+                            <input value="<?php if (isset($_POST['a'])){echo $_POST['a'];}else{echo date("Y-m-d");} ?>" type="text" name="a"
+                                   class="datePicker form-control" required>
+                        </div>
+
+                        <div class="form-group col-3">
+                            <label>Statut</label>
+                            <select class="form-control" name="statut">
+                                <option value="en attent">En attent</option>
+                                <option value="attribuer a réparateur">Attribuer a réparateur</option>
+                                <option value="refuser par réparateur">Refuser par réparateur</option>
+                                <option value="encours">encours</option>
+                                <option value="terminer">Terminer</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-3">
+                            <label>.</label><br>
+                            <input type="submit" value="Valider" class="btn btn-primary">
+                        </div>
+                    </div>
+                </form>
                 <table class="table table-bordered  datatable">
                     <thead>
                     <tr>

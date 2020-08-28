@@ -6,8 +6,8 @@ use systeme\Application\Application as App;
 if (!\systeme\Model\Utilisateur::session()) {
     app::redirection("connexion");
 }
-$role=\systeme\Model\Utilisateur::role();
-$localisation=new GeoLocalisation();
+$role = \systeme\Model\Utilisateur::role();
+$localisation = new GeoLocalisation();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +25,9 @@ $localisation=new GeoLocalisation();
           rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="<?= App::autre("css/sb-admin-2.min.css") ?>" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/b-1.6.3/datatables.min.css"/>
+
 </head>
 
 <body id="page-top">
@@ -44,7 +47,7 @@ $localisation=new GeoLocalisation();
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
-        <li class="nav-item" style="<?php if($role==="agent" || $role ==="reparateur")echo "display:none" ?>">
+        <li class="nav-item" style="<?php if ($role === "agent" || $role === "reparateur") echo "display:none" ?>">
             <a class="nav-link" href="succursal">
                 <i class="fas fa-fw fa-house-user"></i>
                 <span>Succursale</span></a>
@@ -56,7 +59,7 @@ $localisation=new GeoLocalisation();
                 <span>Demmandes</span></a>
         </li>
 
-        <li class="nav-item" style="<?php if($role==="agent" || $role ==="reparateur")echo "display:none" ?>">
+        <li class="nav-item" style="<?php if ($role === "agent" || $role === "reparateur") echo "display:none" ?>">
             <a class="nav-link" href="utilisateur">
                 <i class="fas fa-fw fa-house-user"></i>
                 <span>Utilisateurs</span></a>
@@ -89,17 +92,17 @@ $localisation=new GeoLocalisation();
                 </button>
 
                 <!-- Topbar Search -->
-               <!-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                               aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>-->
+                <!-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                     <div class="input-group">
+                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                         <div class="input-group-append">
+                             <button class="btn btn-primary" type="button">
+                                 <i class="fas fa-search fa-sm"></i>
+                             </button>
+                         </div>
+                     </div>
+                 </form>-->
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -129,7 +132,6 @@ $localisation=new GeoLocalisation();
                     </li>
 
 
-
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
@@ -142,18 +144,18 @@ $localisation=new GeoLocalisation();
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
-                           <!-- <a class="dropdown-item" href="#">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Profile
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Settings
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Activity Log
-                            </a>-->
+                            <!-- <a class="dropdown-item" href="#">
+                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                 Profile
+                             </a>
+                             <a class="dropdown-item" href="#">
+                                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                 Settings
+                             </a>
+                             <a class="dropdown-item" href="#">
+                                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                 Activity Log
+                             </a>-->
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="logout">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -197,15 +199,14 @@ $localisation=new GeoLocalisation();
 </div>
 
 </body>
-<!-- Bootstrap core JavaScript-->
-<script src="<?= App::autre("vendor/jquery/jquery.min.js") ?>"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!--<script src="<? /*= App::autre("vendor/jquery/jquery.min.js") */ ?>"></script>-->
 <script src="<?= App::autre("vendor/bootstrap/js/bootstrap.bundle.min.js") ?>"></script>
 
-<!-- Core plugin JavaScript-->
 <script src="<?= App::autre("vendor/jquery-easing/jquery.easing.min.js") ?>"></script>
-
-<!-- Custom scripts for all pages-->
 <script src="<?= App::autre("js/sb-admin-2.min.js") ?>"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/b-1.6.3/datatables.min.js"></script>
 <script>
     $("document").ready(function () {
         $("form").addClass("was-validated");
@@ -222,16 +223,16 @@ $localisation=new GeoLocalisation();
                 contentType: false,
                 cache: false,
                 processData: false,
-                beforeSend: function(){
+                beforeSend: function () {
                     $(".message").html("<div class='alert alert-info'>Patienter un instant.........</div>")
                 },
                 success: function (reponse) {
-                    if(reponse.trim()==="ok"){
+                    if (reponse.trim() === "ok") {
                         $(".message").html("<div class='alert alert-success'>Enregistrer avec success</div>");
                         alert('fait avec success');
-                        document.location.href='ajouter-demmande';
-                    }else{
-                        $(".message").html("<div class='alert alert-success'>"+reponse+"</div>");
+                        document.location.href = 'ajouter-demmande';
+                    } else {
+                        $(".message").html("<div class='alert alert-success'>" + reponse + "</div>");
                     }
                     $('#load').hide();
                 }
@@ -249,16 +250,16 @@ $localisation=new GeoLocalisation();
                 contentType: false,
                 cache: false,
                 processData: false,
-                beforeSend: function(){
+                beforeSend: function () {
                     $(".message").html("<div class='alert alert-info'>Patienter un instant.........</div>")
                 },
                 success: function (reponse) {
-                    if(reponse.trim()==="ok"){
+                    if (reponse.trim() === "ok") {
                         $(".message").html("<div class='alert alert-success'>Enregistrer avec success</div>");
                         alert('fait avec success');
-                        document.location.href='lister-categorie';
-                    }else{
-                        $(".message").html("<div class='alert alert-success'>"+reponse+"</div>");
+                        document.location.href = 'lister-categorie';
+                    } else {
+                        $(".message").html("<div class='alert alert-success'>" + reponse + "</div>");
                     }
                     $('#load').hide();
                 }
@@ -276,16 +277,16 @@ $localisation=new GeoLocalisation();
                 contentType: false,
                 cache: false,
                 processData: false,
-                beforeSend: function(){
+                beforeSend: function () {
                     $(".message").html("<div class='alert alert-info'>Patienter un instant.........</div>")
                 },
                 success: function (reponse) {
-                    if(reponse.trim()==="ok"){
+                    if (reponse.trim() === "ok") {
                         $(".message").html("<div class='alert alert-success'>Enregistrer avec success</div>");
                         alert('fait avec success');
-                        document.location.href='lister-succursal';
-                    }else{
-                        $(".message").html("<div class='alert alert-success'>"+reponse+"</div>");
+                        document.location.href = 'lister-succursal';
+                    } else {
+                        $(".message").html("<div class='alert alert-success'>" + reponse + "</div>");
                     }
                     $('#load').hide();
                 }
@@ -303,16 +304,16 @@ $localisation=new GeoLocalisation();
                 contentType: false,
                 cache: false,
                 processData: false,
-                beforeSend: function(){
+                beforeSend: function () {
                     $(".message").html("<div class='alert alert-info'>Patienter un instant.........</div>")
                 },
                 success: function (reponse) {
-                    if(reponse.trim()==="ok"){
+                    if (reponse.trim() === "ok") {
                         $(".message").html("<div class='alert alert-success'>Fait avec success</div>");
                         alert('fait avec success');
                         location.reload(true);
-                    }else{
-                        $(".message").html("<div class='alert alert-success'>"+reponse+"</div>");
+                    } else {
+                        $(".message").html("<div class='alert alert-success'>" + reponse + "</div>");
                     }
                     $('#load').hide();
                 }
@@ -330,24 +331,22 @@ $localisation=new GeoLocalisation();
                 contentType: false,
                 cache: false,
                 processData: false,
-                beforeSend: function(){
+                beforeSend: function () {
                     $(".message").html("<div class='alert alert-info'>Patienter un instant.........</div>")
                 },
                 success: function (reponse) {
-                    if(reponse.trim()==="ok"){
+                    if (reponse.trim() === "ok") {
                         $(".message").html("<div class='alert alert-success'>Fait avec success</div>");
                         alert('fait avec success');
                         location.reload(true);
-                    }else{
-                        $(".message").html("<div class='alert alert-success'>"+reponse+"</div>");
+                    } else {
+                        $(".message").html("<div class='alert alert-success'>" + reponse + "</div>");
                     }
                     $('#load').hide();
                 }
             });
 
         });
-
-
 
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -358,8 +357,22 @@ $localisation=new GeoLocalisation();
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
         $("#imgInp").change(function () {
             readURL(this);
+        });
+
+
+        $(".datepicker").datepicker(
+            {
+                "dateFormat":"yy-mm-dd"
+            }
+        );
+
+        $('.datatable').DataTable({
+            buttons: [
+                'copy', 'excel', 'pdf'
+            ]
         });
 
 

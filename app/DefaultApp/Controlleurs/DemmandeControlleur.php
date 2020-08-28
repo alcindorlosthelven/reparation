@@ -80,10 +80,28 @@ class DemmandeControlleur extends BaseControlleur
         $id_user=Utilisateur::session_valeur();
         if($role==="agent"){
             $listeDemmande = $this->getModel("demmandeReparation")->listerParAgent($id_user);
+            if (isset($_POST['de'])) {
+                $de = \app\DefaultApp\DefaultApp::convertDate($_POST['de']);
+                $a = \app\DefaultApp\DefaultApp::convertDate($_POST['a']);
+                $statut = $_POST['statut'];
+                $listeDemmande = $this->getModel("demmandeReparation")->listerParAgent($id_user,$de,$a,$statut);
+            }
         }elseif($role==="reparateur"){
             $listeDemmande = $this->getModel("demmandeReparation")->listerParReparateur($id_user);
+            if (isset($_POST['de'])) {
+                $de = \app\DefaultApp\DefaultApp::convertDate($_POST['de']);
+                $a = \app\DefaultApp\DefaultApp::convertDate($_POST['a']);
+                $statut = $_POST['statut'];
+                $listeDemmande = $this->getModel("demmandeReparation")->listerParReparateur($id_user,$de,$a,$statut);
+            }
         } else{
             $listeDemmande = $this->getModel("demmandeReparation")->findAll();
+            if (isset($_POST['de'])) {
+                $de = \app\DefaultApp\DefaultApp::convertDate($_POST['de']);
+                $a = \app\DefaultApp\DefaultApp::convertDate($_POST['a']);
+                $statut = $_POST['statut'];
+                $listeDemmande = $this->getModel("demmandeReparation")->listerAll($de,$a,$statut);
+            }
         }
 
         $listeReparateur=Utilisateur::listeReparateur();

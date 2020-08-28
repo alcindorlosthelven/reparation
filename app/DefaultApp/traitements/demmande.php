@@ -119,3 +119,31 @@ if(isset($_POST['preuve'])){
     $m=$demmande->update();
     echo $m;
 }
+
+if(isset($_POST['explication'])){
+    $explication=trim(addslashes($_POST['contenue']));
+    if(empty($explication)){
+        echo "Entrer une explication";
+        return;
+    }
+    $id = $_POST['id'];
+    $demmande = new \app\DefaultApp\Models\DemmandeReparation();
+    $demmande = $demmande->findById($id);
+    $demmande->setExplicationAdditionel($explication);
+    $m=$demmande->update();
+    echo $m;
+}
+
+if(isset($_POST['reponse_explication'])){
+    $explication=trim(addslashes($_POST['contenue']));
+    if(empty($explication)){
+        echo "Entrer une reponse";
+        return;
+    }
+    $id = $_POST['id'];
+    $demmande = new \app\DefaultApp\Models\DemmandeReparation();
+    $demmande = $demmande->findById($id);
+    $demmande->setReponseExplication($explication);
+    $m=$demmande->update();
+    echo $m;
+}

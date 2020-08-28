@@ -2,8 +2,8 @@
     <div class="col-md-12">
         <?= \systeme\Application\Application::block("menu_utilisateur") ?>
         <?php
-        $suc=new \app\DefaultApp\Models\Succursal();
-        $listeSuc=$suc->findAll();
+        $suc = new \app\DefaultApp\Models\Succursal();
+        $listeSuc = $suc->findAll();
         ?>
         <div class="card">
             <div class="card-header"><h4>Ajouter Utilisateur</h4></div>
@@ -27,7 +27,7 @@
                     </div>
                     <script>
                         alert('<?=$success?>');
-                        document.location.href='ajouter-utilisateur';
+                        document.location.href = 'ajouter-utilisateur';
                     </script>
                     <?php
                 }
@@ -45,12 +45,14 @@
 
                             <div class="form-group">
                                 <label for="company">Prénom</label>
-                                <input required type="text" class="form-control  prenom" name="prenom" placeholder="Prénom Utilisateur">
+                                <input required type="text" class="form-control  prenom" name="prenom"
+                                       placeholder="Prénom Utilisateur">
                             </div>
 
                             <div class="form-group">
                                 <label for="company">Pseudo</label>
-                                <input required type="text" class="form-control identifiant" name="pseudo" placeholder="Pseudo">
+                                <input required type="text" class="form-control identifiant" name="pseudo"
+                                       placeholder="Pseudo">
                             </div>
 
                             <div class="form-group">
@@ -76,6 +78,18 @@
                         <div class="col-md-6">
 
                             <div class="form-group">
+                                <label for="company">Email</label>
+                                <input type="email" class="form-control" name="email"
+                                       placeholder="Email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="company">Télephone</label>
+                                <input type="text" class="form-control" name="telephone"
+                                       placeholder="Télephone">
+                            </div>
+
+                            <div class="form-group">
                                 <label for="company">Motdepasse</label>
                                 <input required type="password" class="form-control" id="prenom" name="motdepasse"
                                        placeholder="Motdepasse">
@@ -83,11 +97,12 @@
 
                             <div class="form-group">
                                 <label for="company">Confirmer Motdepasse</label>
-                                <input required type="password" class="form-control" id="prenom" name="confirmermotdepasse"
+                                <input required type="password" class="form-control" id="prenom"
+                                       name="confirmermotdepasse"
                                        placeholder="Confirmer motdepasse">
                             </div>
 
-                            <div class="form-group pull-right">
+                            <div class="form-group float-right">
                                 <input type="submit" value="Enregistrer" class="btn btn-primary btn-lg"/>
                             </div>
 

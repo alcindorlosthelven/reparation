@@ -40,4 +40,24 @@ class Utilisateur extends user
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_CLASS,__CLASS__);
     }
+
+    public function update(){
+        $con=self::connection();
+        $req="update utilisateur set nom=:nom,prenom=:prenom,pseudo=:pseudo,email=:email,telephone=:telephone,motdepasse=:motdepasse where id=:id";
+        $param=array(
+          ":nom"=>$this->nom,
+          ":prenom"=>$this->prenom,
+          ":pseudo"=>$this->pseudo,
+          ":email"=>$this->email,
+          ":telephone"=>$this->telephone,
+          ":motdepasse"=>$this->motdepasse,
+          ":id"=>$this->id
+        );
+        $stmt=$con->prepare($req);
+        if($stmt->execute($param)){
+            return "ok";
+        }else{
+            return "no";
+        }
+    }
 }

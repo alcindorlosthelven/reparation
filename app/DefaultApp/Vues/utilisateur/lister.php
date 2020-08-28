@@ -1,4 +1,3 @@
-
 <div class="row">
     <div class="col-md-12">
         <?= \systeme\Application\Application::block("menu_utilisateur") ?>
@@ -16,29 +15,32 @@
                     <thead>
                     <tr>
                         <th>Nom et Prénom</th>
+                        <th>Télephone</th>
+                        <th>Email</th>
                         <th>Pseudo</th>
                         <th>Role</th>
                         <th>Active</th>
+                        <th></th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
 
                     <?php
-                    if(isset($listeUtilisateur))
-                    {
+                    if (isset($listeUtilisateur)) {
                         foreach ($listeUtilisateur as $utilisateur) {
-                            if($utilisateur->getPseudo()!="admin" or $utilisateur->getRole()!=="super_admin") {
+                            if ($utilisateur->getPseudo() != "admin" or $utilisateur->getRole() !== "super_admin") {
                                 ?>
                                 <tr>
                                     <td><?= strtoupper($utilisateur->getNom() . " " . $utilisateur->getPrenom()); ?></td>
+                                    <td><?= $utilisateur->getTelephone() ?></td>
+                                    <td><?= $utilisateur->getEmail() ?></td>
                                     <td><?= $utilisateur->getPseudo(); ?></td>
                                     <td><?= $utilisateur->getRole(); ?></td>
                                     <td><?= $utilisateur->getActive(); ?></td>
-                                    <!--<td>
-                                <a href="modifier-utilisateur-<?/*= $utilisateur->getId()*/
-                                    ?>"><i class="icon-pencil"></i></a>
-                            </td>-->
+                                    <td>
+                                        <a href="modifier-utilisateur-<?= $utilisateur->getId() ?>">Modifier</a>
+                                    </td>
 
                                     <?php
 
@@ -66,8 +68,7 @@
                                 <?php
                             }
                         }
-                    }else
-                    {
+                    } else {
                         echo "Variabl listeEleve existe pas";
                     }
                     ?>
