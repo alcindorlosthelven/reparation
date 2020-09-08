@@ -10,6 +10,8 @@
                     <tr>
                         <th>Id</th>
                         <th>Catégorie</th>
+                        <th>Montant</th>
+                        <th>Pourcentage Avance</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -23,9 +25,11 @@
                             <tr>
                                 <td><?= $suc->getId(); ?></td>
                                 <td><?= stripslashes($suc->getCategorie()) ?></td>
+                                <td><?= \app\DefaultApp\DefaultApp::formatComptable($suc->getMontant()) ?></td>
+                                <td><?= $suc->getPourcentageAvance() ?> % </td>
+
                                 <td>
-                                    <a class="delete" href="modifier-categorie-<?= $suc->getId() ?>"><i
-                                                style="color:red" class="fa fa-edit"></i></a>
+                                    <a class="delete" href="modifier-categorie-<?= $suc->getId() ?>"><i style="color:red" class="fa fa-edit"></i></a>
                                 </td>
 
                             </tr>

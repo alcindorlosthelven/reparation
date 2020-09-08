@@ -1,5 +1,7 @@
 <?php
+
 use app\DefaultApp\Models\Utilisateur;
+
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -42,9 +44,22 @@ use app\DefaultApp\Models\Utilisateur;
 
                 <form method="post" action="" class="ajouter_categorie" enctype="multipart/form-data">
                     <input type="hidden" name="ajouter_categorie">
-                    <div class="form-group">
-                        <label>Catégorie</label>
-                        <input type="text" name="categorie" class="form-control">
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label>Catégorie</label>
+                            <input type="text" name="categorie" class="form-control" required>
+                        </div>
+
+                        <div class="col-6 form-group">
+                            <label>Montant</label>
+                            <input min="50" name="montant" type="number" step="any" class="form-control" required>
+                        </div>
+
+                        <div class="col-6 form-group">
+                            <label>Pourcentage Avance %</label>
+                            <input name="pourcentage_avance" min="1" max="100" type="number" step="any" class="form-control" required>
+                        </div>
+
                     </div>
 
                     <div class="form-group">

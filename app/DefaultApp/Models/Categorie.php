@@ -12,7 +12,40 @@ use systeme\Model\Model;
 
 class Categorie extends Model
 {
- private $id,$categorie;
+    private $id, $categorie, $montant, $pourcentage_avance;
+
+    /**
+     * @return mixed
+     */
+    public function getMontant()
+    {
+        return $this->montant;
+    }
+
+    /**
+     * @param mixed $montant
+     */
+    public function setMontant($montant)
+    {
+        $this->montant = $montant;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPourcentageAvance()
+    {
+        return $this->pourcentage_avance;
+    }
+
+    /**
+     * @param mixed $pourcentage_avance
+     */
+    public function setPourcentageAvance($pourcentage_avance)
+    {
+        $this->pourcentage_avance = $pourcentage_avance;
+    }
+
 
     /**
      * @return mixed

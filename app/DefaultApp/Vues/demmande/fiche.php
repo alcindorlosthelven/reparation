@@ -25,6 +25,10 @@
         } else {
             return;
         }
+        $montantTotal=$cat->getMontant();
+        $pourcentage=$cat->getPourcentageAvance();
+        $avance=($montantTotal*$pourcentage) / 100;
+        $balance=$montantTotal-$avance;
         ?>
         <div class="card">
             <div class="card-header">
@@ -76,13 +80,19 @@
                     <div class="col-12">
                         <hr>
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-4">
                         <strong><label>Description</label></strong><br>
                         <?php if (isset($fiche)) echo stripslashes($fiche->getDescription()) ?>
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-8">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-4">
+                                <label>Montant Total : </label><strong> <?= $montantTotal ?> GDS</strong><br>
+                                <label>Pourcentage Avance : </label><strong> <?= $pourcentage ?> %</strong><br>
+                                <label>Avance 1 : </label><strong> <?= $avance ?> GDS</strong><br>
+                                <label>Balance : </label><strong> <?= $balance ?> GDS</strong>
+                            </div>
+                            <div class="col-4">
                                 <label>Avance 1 </label><br>
                                 <?php if ($fiche->getNote1() !== "n/a") {
                                     ?>
@@ -145,7 +155,7 @@
                                 }
                                 ?>
                             </div>
-                            <div class="col-6">
+                            <div class="col-4">
                                 <label>Avance Final </label><br>
                                 <?php if ($fiche->getNote2() !== "n/a") {
                                     ?>
@@ -153,6 +163,7 @@
                                     <?php
                                 } else {
                                     if ($role === "agent" || $role === "administrateur") {
+
                                         if ($fiche->getStatut() === "encours" and $fiche->getNote1() !== "n/a" and $fiche->getPreuve() !== "n/a") {
                                             ?>
                                             <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -212,6 +223,7 @@
                     </div>
 
 
+                    <div class="col-12"><hr></div>
                     <div class="form-group col-6">
                         <strong><label>Explication additionel</label></strong><br>
                         <?php
@@ -330,9 +342,7 @@
                         ?>
                     </div>
 
-                    <div class="col-12">
-                        <hr>
-                    </div>
+                    <div class="col-12"><hr></div>
 
                     <div class="col-6">
                         <?php
