@@ -87,10 +87,10 @@
                     <div class="form-group col-8">
                         <div class="row">
                             <div class="col-4">
-                                <label>Montant Total : </label><strong> <?= $montantTotal ?> GDS</strong><br>
+                                <label>Montant Total : </label><strong> <?= \app\DefaultApp\DefaultApp::formatComptable($montantTotal) ?> GDS</strong><br>
                                 <label>Pourcentage Avance : </label><strong> <?= $pourcentage ?> %</strong><br>
-                                <label>Avance 1 : </label><strong> <?= $avance ?> GDS</strong><br>
-                                <label>Balance : </label><strong> <?= $balance ?> GDS</strong>
+                                <label>Avance 1 : </label><strong> <?= \app\DefaultApp\DefaultApp::formatComptable($avance) ?> GDS</strong><br>
+                                <label>Balance : </label><strong> <?= \app\DefaultApp\DefaultApp::formatComptable($balance) ?> GDS</strong>
                             </div>
                             <div class="col-4">
                                 <label>Avance 1 </label><br>
