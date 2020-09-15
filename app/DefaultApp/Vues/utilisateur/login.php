@@ -18,6 +18,9 @@
                                 <div class="text-center">
                                     <div class="message"></div>
                                     <h1 class="h4 text-gray-900 mb-4">Bienvenue !</h1>
+                                    <img src="<?= \app\DefaultApp\Models\Configuration::getValueOfConfiguraton("logo"); ?>" style="height: 100px">
+                                    <br>
+                                    <br>
                                 </div>
                                 <form class="user form-signin con was-validated" method="post">
                                     <input type="hidden" name="login">
@@ -31,8 +34,8 @@
 
 
                                     <input type="submit" class="btn btn-primary btn-user btn-block" value="Se Connecter">
-
                                     <hr>
+                                    <strong>Réaliser par : <a target="_blank" href="https://haitisolution.net">SolutionIp</a></strong>
                                 </form>
 
                             </div>
@@ -53,8 +56,7 @@
                     style="color: red"><?= stripslashes(\app\DefaultApp\Models\Configuration::getValueOfConfiguraton("titre_login")); ?></h2>
             <span class="text-center"
                   style="font-weight: bold;color: dimgray;"><?= stripslashes(\app\DefaultApp\Models\Configuration::getValueOfConfiguraton("definition_titre_login")); ?></span><br>
-            <img src="<?= \app\DefaultApp\Models\Configuration::getValueOfConfiguraton("logo"); ?>"
-                 style="height: 60px">
+            <img src="<?= \app\DefaultApp\Models\Configuration::getValueOfConfiguraton("logo"); ?>" style="height: 60px">
         </center>
     </div>
     <div class="card-body">

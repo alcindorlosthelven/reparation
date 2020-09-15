@@ -13,7 +13,6 @@
             $cat = $cat->findById($id_categorie);
             $succursal = new \app\DefaultApp\Models\Succursal();
             $succursal = $succursal->findById($id_succursal);
-
             $id_reparateur = $fiche->getIdReparateur();
             $reparateur = "n/a";
             if ($id_reparateur === "n/a") {
@@ -48,7 +47,7 @@
                 <div class="row">
                     <div class="form-group col-4">
                         <strong><label>Catégorie</label></strong><br>
-                        <?php if (isset($cat)) echo stripslashes($cat->getCategorie()); ?>
+                        <?php if(isset($cat)) echo stripslashes($cat->getCategorie()); ?>
                     </div>
 
                     <div class="form-group col-4">
@@ -429,9 +428,7 @@
                                 <?php
                             }
                         }
-                        ?>
 
-                        <?php
                         if (isset($fiche)) {
                             $preuve = $fiche->getPreuve();
                             if ($preuve !== "n/a") {

@@ -28,6 +28,7 @@ $localisation = new GeoLocalisation();
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/b-1.6.3/datatables.min.css"/>
 
+
 </head>
 
 <body id="page-top">
@@ -38,10 +39,7 @@ $localisation = new GeoLocalisation();
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
-            <div class="sidebar-brand-text mx-3">Réparation</div>
+            <img src="<?= \app\DefaultApp\Models\Configuration::getValueOfConfiguraton("logo"); ?>" style="height: 60px">
         </a>
 
         <!-- Divider -->
