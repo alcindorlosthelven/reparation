@@ -36,6 +36,7 @@
 
                     </div>
                 </form>
+                <div class="table-responsive">
                 <table class="table table-bordered  datatable">
                     <thead>
                     <tr>
@@ -99,6 +100,7 @@
 
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
 

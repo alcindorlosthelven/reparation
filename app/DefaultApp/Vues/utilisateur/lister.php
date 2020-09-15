@@ -10,7 +10,7 @@
                 <a href="utilisateur?reparateur" class="btn btn-warning">Réparateur</a>
                 <a href="utilisateur?tous" class="btn btn-warning">Tous</a>
                 <hr>
-
+                <div class="table-responsive">
                 <table class="table table-bordered  datatable">
                     <thead>
                     <tr>
@@ -75,6 +75,7 @@
 
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
 
