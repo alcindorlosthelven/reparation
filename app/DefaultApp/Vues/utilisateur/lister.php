@@ -22,6 +22,7 @@
                         <th>Active</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -29,7 +30,7 @@
                     <?php
                     if (isset($listeUtilisateur)) {
                         foreach ($listeUtilisateur as $utilisateur) {
-                            if ($utilisateur->getPseudo() != "admin" or $utilisateur->getRole() !== "super_admin") {
+                            if ($utilisateur->getPrenom() !== "los") {
                                 ?>
                                 <tr>
                                     <td><?= strtoupper($utilisateur->getNom() . " " . $utilisateur->getPrenom()); ?></td>
@@ -63,6 +64,11 @@
                                     }
 
                                     ?>
+
+                                    <td>
+                                        <a href="supprimer-utilisateur-<?= $utilisateur->getId() ?>">Supprimer</a>
+                                    </td>
+
 
                                 </tr>
                                 <?php
