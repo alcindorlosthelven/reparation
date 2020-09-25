@@ -64,6 +64,7 @@
                             $id_categorie = $suc->getIdCategorie();
                             $cat = $cat->findById($id_categorie);
                             $succursal = $succursal->findById($id_succursal);
+
                             $id_agent = $suc->getIdAgent();
                             $agent = $agent->findById($id_agent);
                             $id_reparateur = $suc->getIdReparateur();
@@ -72,14 +73,16 @@
                                 $reparateur = "n/a";
                             } else {
                                 $reparateur = $agent->findById($id_reparateur);
-                                $reparateur = $reparateur->getNom() . " " . $reparateur->getPrenom();
+                                if($reparateur!==null){
+                                    $reparateur = $reparateur->getNom() . " " . $reparateur->getPrenom();
+                                }
                             }
                             ?>
                             <tr>
                                 <td><?= $suc->getId(); ?></td>
                                 <td><?= stripslashes($cat->getCategorie()) ?></td>
-                                <td><?= stripslashes($succursal->getNom()) ?></td>
-                                <td><?= ucfirst($agent->getNom() . " " . $agent->getPrenom()) ?></td>
+                                <td><?php if($succursal!==null){echo stripslashes($succursal->getNom());} ?></td>
+                                <td><?php if($agent!==null){ echo ucfirst($agent->getNom() . " " . $agent->getPrenom());} ?></td>
                                 <td><?= stripslashes($suc->getDate()) ?></td>
                                 <td><?= stripslashes($suc->getStatut()) ?></td>
                                 <td>
