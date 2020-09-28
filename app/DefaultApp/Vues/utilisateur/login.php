@@ -35,7 +35,7 @@
 
                                     <input type="submit" class="btn btn-primary btn-user btn-block" value="Se Connecter">
                                     <hr>
-                                    <strong>Réaliser par : <a target="_blank" href="https://haitisolution.net">SolutionIp</a></strong>
+                                    <strong>Réaliser par : <a target="_blank" href="https://haitisolution.net">Solution Ip</a></strong>
                                 </form>
 
                             </div>
