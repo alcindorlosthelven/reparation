@@ -39,7 +39,6 @@ use app\DefaultApp\DefaultApp as app;
 <script src="<?= App::autre("js/sb-admin-2.min.js") ?>"></script>
 <script>
     $('document').ready(function () {
-        xcv
         $('#load').hide();
         $(".form-signin").on("submit", function (e) {
             $("#btn-login").css("display","none");
