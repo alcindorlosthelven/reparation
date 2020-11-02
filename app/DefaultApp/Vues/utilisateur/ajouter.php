@@ -79,14 +79,13 @@
 
                             <div class="form-group">
                                 <label for="company">Email</label>
-                                <input type="email" class="form-control" name="email"
-                                       placeholder="Email">
+                                <input type="email" class="form-control" name="email" placeholder="Email" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="company">Télephone</label>
                                 <input type="text" class="form-control" name="telephone"
-                                       placeholder="Télephone">
+                                       placeholder="Télephone" required>
                             </div>
 
                             <div class="form-group">
